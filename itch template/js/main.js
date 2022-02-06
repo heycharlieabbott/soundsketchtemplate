@@ -30,6 +30,15 @@ this.composer.addPass(pass3);
 
 var times = 0;
 
+pass1.uniforms.width.value = window.innerWidth;
+pass1.uniforms.height.value = window.innerHeight;
+
+pass2.uniforms.width.value = window.innerWidth;
+pass2.uniforms.height.value = window.innerHeight;
+
+pass3.uniforms.width.value = window.innerWidth;
+pass3.uniforms.height.value = window.innerHeight;
+
 //renderloop
 render();
 function render(){
@@ -43,12 +52,23 @@ function render(){
     pass1.uniforms.times.value = times;
     pass2.uniforms.times.value = times;
     pass3.uniforms.times.value = times;
+    
    
     composer.render();
     
 }
 
+// function onWindowResize(){
 
+//     // pass1.uniforms.width.value = window.innerWidth;
+//     // pass1.uniforms.height.value = window.innerHeight;
 
+//     // pass2.uniforms.width.value = window.innerWidth;
+//     // pass2.uniforms.height.value = window.innerHeight;
+
+//     // pass3.uniforms.width.value = window.innerWidth;
+//     // pass3.uniforms.height.value = window.innerHeight;
+
+// }
 
 

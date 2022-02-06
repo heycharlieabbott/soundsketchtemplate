@@ -16,7 +16,7 @@ var bally = 0;
 
 var speed = 1.;
 
-window.addEventListener(
+myCanvas.addEventListener(
     "mousemove",
     event => {
     mousex = event.clientX / window.innerWidth;
@@ -54,7 +54,7 @@ window.addEventListener(
     false
 );
 
-window.addEventListener(
+myCanvas.addEventListener(
     "touchmove",
     event => {
     touchx = event.touches[0].clientX  / window.innerWidth;

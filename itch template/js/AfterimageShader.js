@@ -21,6 +21,12 @@
 			},
 			'mousey': {
 				value: 1.0
+			},
+			'width':{
+				value: 1.0
+			},
+            'height':{
+				value: 1.0
 			}
 		},
 		vertexShader:
@@ -45,6 +51,8 @@
 		uniform float times;
 		uniform float mousex;
 		uniform float mousey;
+		uniform float width;
+		uniform float height;
 
 		varying vec2 vUv;
 
