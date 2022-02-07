@@ -1,13 +1,36 @@
 var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas')});
-renderer.setClearColor(0x00ff00);
+renderer.setClearColor(0);
+// debug color renderer.setClearColor(0x00ff00);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth,window.innerHeight);
 
+//main camera and scene
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
 var scene = new THREE.Scene();
 
-var bufcamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
-var bufscene = new THREE.Scene();
+//start menu
+var startcamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
+var startscene = new THREE.Scene();
+
+const texture = new THREE.TextureLoader().load('js/startbutton.png');
+
+const geometry = new THREE.PlaneGeometry( 3, 3 );
+const material = new THREE.MeshBasicMaterial( {map: texture} );
+const plane = new THREE.Mesh( geometry, material );
+startcamera.position.z =5;
+startscene.add( plane );
+
+//start menu toggle
+var start = false;
+myCanvas.addEventListener('click', 
+    event => { 
+        start = !start;
+}, false);
+
+function onWindowResize(){
+    startcamera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+}
 
 
 //composers
@@ -39,6 +62,8 @@ pass2.uniforms.height.value = window.innerHeight;
 pass3.uniforms.width.value = window.innerWidth;
 pass3.uniforms.height.value = window.innerHeight;
 
+
+
 //renderloop
 render();
 function render(){
@@ -53,9 +78,13 @@ function render(){
     pass2.uniforms.times.value = times;
     pass3.uniforms.times.value = times;
     
+    //start menu and scene switch
+    if (start){
+        composer.render();
+    }
+
+     else renderer.render(startscene,startcamera);
    
-    composer.render();
-    
 }
 
 // function onWindowResize(){
