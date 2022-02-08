@@ -6,6 +6,7 @@ renderer.setSize(window.innerWidth,window.innerHeight);
 
 //main camera and scene
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
+camera.add( listener );
 var scene = new THREE.Scene();
 
 //start menu
