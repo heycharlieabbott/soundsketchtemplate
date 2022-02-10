@@ -16,6 +16,28 @@ var bally = 0;
 
 var speed = 1.;
 
+//sound settings
+//init fade state
+var fadein1 = false;
+var fadein2 = false;
+var fadeout1 = false;
+var fadeout2 = false;
+
+//fade times
+var fadein1time = 500;
+var fadeout1time = 500;
+var fadein2time = 500;
+var fadeout2time = 500;
+
+//thresholds for audio fade
+var inthresh = 0.3;
+var outthresh = 0.9;
+
+var inloc1 = 0.5;
+var outloc1 = 0.5;
+var inloc2 = 0.5;
+var outloc2 = 0.5;
+
 myCanvas.addEventListener(
     "mousemove",
     event => {
@@ -39,16 +61,40 @@ myCanvas.addEventListener(
     
 //mouse settings for audio control
 
-    // if (mousex < .5){
-    //     volume2 = 0;
-    //     volume1 = 1;
-    // }
+if (ballx < inloc1 && fadein1 == false && howl1.volume() <inthresh){
+    fadein1 = true;
+    howl1.fade(0.,1.,fadein1time);
+    howl1.on('fade', function(){
+        fadein1 = false;
+    });
+    
+}
 
-    // else (volume2 = 1,
-    //     volume1 = 0);
+if (ballx >= outloc1 && fadeout1 == false && howl1.volume() >= outthresh){
+    fadeout1 = true;
+    howl1.fade(1.,0.,fadeout1time);
+    howl1.on('fade', function(){
+        fadeout1 = false;
+    });
 
-    // sound2.setVolume(volume2);
-    // sound.setVolume(volume1);
+}
+
+if (ballx < outloc2 && fadeout2 == false && howl2.volume() >= outthresh){
+    fadeout2 = true;
+    howl2.fade(1.,0.,100);
+    howl2.on('fade', function(){
+        fadeout2 = false;
+    });
+}
+
+if (ballx >= inloc2 && fadein2 == false && howl2.volume() <= inthresh){
+    fadein2 = true;
+    howl2.fade(0.,1.,100);
+    howl2.on('fade', function(){
+        fadein2 = false;
+    });
+    
+}
 
     },
     false
@@ -71,16 +117,42 @@ myCanvas.addEventListener(
 
 //touch settings for audio control
 
-    // if (touchx > .5){
-    //     volume2 = 0;
-    //     volume1 = 1;
-    // }
+    //touch settings for audio control
 
-    // else (volume2 = 1,
-    //     volume1 = 0);
+if (touchx < inloc1 && fadein1 == false && howl1.volume() <0.3){
+    fadein1 = true;
+    howl1.fade(0.,1.,fadein1time);
+    howl1.on('fade', function(){
+        fadein1 = false;
+    });
+    
+}
 
-    // sound2.setVolume(volume2);
-    // sound.setVolume(volume1);
+if (touchx >= outloc1 && fadeout1 == false && howl1.volume() >= 0.8){
+    fadeout1 = true;
+    howl1.fade(1.,0.,fadeout1time);
+    howl1.on('fade', function(){
+        fadeout1 = false;
+    });
+
+}
+
+if (touchx < outloc2 && fadeout2 == false && howl2.volume() >= 0.8){
+    fadeout2 = true;
+    howl2.fade(1.,0.,100);
+    howl2.on('fade', function(){
+        fadeout2 = false;
+    });
+}
+
+if (touchx >= inloc2 && fadein2 == false && howl2.volume() <= 0.3){
+    fadein2 = true;
+    howl2.fade(0.,1.,100);
+    howl2.on('fade', function(){
+        fadein2 = false;
+    });
+    
+}
 
     },
     false

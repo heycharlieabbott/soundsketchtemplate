@@ -1,46 +1,29 @@
 // create an AudioListener and add it to the camera
 const listener = new THREE.AudioListener();
 
-// create a global audio source
-const sound = new THREE.Audio( listener );
-const sound2 = new THREE.Audio( listener );
+var howl1 = new Howl({
+    src: ['js/audio1.mp3'],
+    html5: true,
+    loop: true,
+  });
 
-// load a sound and set it as the Audio object's buffer
-const audioLoader = new THREE.AudioLoader();
-audioLoader.load( 'js/audio1.mp3', function( buffer ) {
-    sound.setBuffer( buffer );
-    sound.setLoop( true );
-    sound.setVolume( 1.0 );
-    sound.stop();
-});
-
-
-const audioLoader2 = new THREE.AudioLoader();
-audioLoader2.load( 'js/audio2.mp3', function( buffer ) {
-    sound2.setBuffer( buffer );
-    sound2.setLoop( true );
-    sound2.setVolume( 0.0 );
-    sound2.stop();
-});
-
+var howl2 = new Howl({
+    src: ['js/audio2.mp3'],
+    html5: true,
+    loop: true,
+  });
 
 myCanvas.addEventListener('click', function() {
-    if (sound.isPlaying == true){
-        sound.pause();
-    
-    }
-    else (sound.play())
-    if (sound.context.state == 'suspended'){
-        sound.play();
-    }
-}, false);
 
-myCanvas.addEventListener('touchmove', function() {
-    if (sound.isPlaying == true){
-        return;
+    if (howl1.playing() == true || howl2.playing() == true ){
+        howl1.pause();
+        howl2.pause();
     }
-    sound.play();
-    if (sound.context.state == 'suspended'){
-        sound.play();
+
+    else {
+        howl1.play();
+        howl2.play();
     }
+    
+
 }, false);

@@ -26,6 +26,11 @@ var start = false;
 myCanvas.addEventListener('click', 
     event => { 
         start = !start;
+        if(start == true && howl1.volume() <0.2 && howl2.volume() < 0.2 ){
+            howl1.volume(1.);
+            howl2.volume(0.);
+        
+        }
 }, false);
 
 function onWindowResize(){
