@@ -59,42 +59,54 @@ myCanvas.addEventListener(
     pass3.uniforms.mousey.value = bally;
    
     
-//mouse settings for audio control
+//mouse settings for audio control commented out parts are fade controls that were deactivated for iOS compatibility
 
-if (ballx < inloc1 && fadein1 == false && howl1.volume() <inthresh){
-    fadein1 = true;
-    howl1.fade(0.,1.,fadein1time);
-    howl1.on('fade', function(){
-        fadein1 = false;
-    });
+// if (ballx < inloc1 && fadein1 == false && howl1.volume() <inthresh){
+//     fadein1 = true;
+//     howl1.fade(0.,1.,fadein1time);
+//     howl1.on('fade', function(){
+//         fadein1 = false;
+//     });
     
-}
+// }
 
-if (ballx >= outloc1 && fadeout1 == false && howl1.volume() >= outthresh){
-    fadeout1 = true;
-    howl1.fade(1.,0.,fadeout1time);
-    howl1.on('fade', function(){
-        fadeout1 = false;
-    });
+// if (ballx >= outloc1 && fadeout1 == false && howl1.volume() >= outthresh){
+//     fadeout1 = true;
+//     howl1.fade(1.,0.,fadeout1time);
+//     howl1.on('fade', function(){
+//         fadeout1 = false;
+//     });
 
-}
+// }
 
-if (ballx < outloc2 && fadeout2 == false && howl2.volume() >= outthresh){
-    fadeout2 = true;
-    howl2.fade(1.,0.,100);
-    howl2.on('fade', function(){
-        fadeout2 = false;
-    });
-}
+// if (ballx < outloc2 && fadeout2 == false && howl2.volume() >= outthresh){
+//     fadeout2 = true;
+//     howl2.fade(1.,0.,100);
+//     howl2.on('fade', function(){
+//         fadeout2 = false;
+//     });
+// }
 
-if (ballx >= inloc2 && fadein2 == false && howl2.volume() <= inthresh){
-    fadein2 = true;
-    howl2.fade(0.,1.,100);
-    howl2.on('fade', function(){
-        fadein2 = false;
-    });
+// if (ballx >= inloc2 && fadein2 == false && howl2.volume() <= inthresh){
+//     fadein2 = true;
+//     howl2.fade(0.,1.,100);
+//     howl2.on('fade', function(){
+//         fadein2 = false;
+//     });
     
-}
+// }
+
+if(start == true && howl1.playing() == false && mousex < 0.5){
+    howl1.play();
+    howl2.pause();
+
+ }
+
+ if(start == true && howl2.playing() == false && mousex >= 0.5){
+    howl2.play();
+    howl1.pause();
+
+ }
 
     },
     false
@@ -115,44 +127,54 @@ myCanvas.addEventListener(
     pass3.uniforms.mousey.value = touchy;
 
 
-//touch settings for audio control
+//touch settings for audio control, commented out parts are fade controls that were deactivated for iOS compatibility
 
-    //touch settings for audio control
-
-if (touchx < inloc1 && fadein1 == false && howl1.volume() <0.3){
-    fadein1 = true;
-    howl1.fade(0.,1.,fadein1time);
-    howl1.on('fade', function(){
-        fadein1 = false;
-    });
+// if (touchx < inloc1 && fadein1 == false && howl1.volume() <0.3){
+//     fadein1 = true;
+//     howl1.fade(0.,1.,fadein1time);
+//     howl1.on('fade', function(){
+//         fadein1 = false;
+//     });
     
-}
+// }
 
-if (touchx >= outloc1 && fadeout1 == false && howl1.volume() >= 0.8){
-    fadeout1 = true;
-    howl1.fade(1.,0.,fadeout1time);
-    howl1.on('fade', function(){
-        fadeout1 = false;
-    });
+// if (touchx >= outloc1 && fadeout1 == false && howl1.volume() >= 0.8){
+//     fadeout1 = true;
+//     howl1.fade(1.,0.,fadeout1time);
+//     howl1.on('fade', function(){
+//         fadeout1 = false;
+//     });
 
-}
+// }
 
-if (touchx < outloc2 && fadeout2 == false && howl2.volume() >= 0.8){
-    fadeout2 = true;
-    howl2.fade(1.,0.,100);
-    howl2.on('fade', function(){
-        fadeout2 = false;
-    });
-}
+// if (touchx < outloc2 && fadeout2 == false && howl2.volume() >= 0.8){
+//     fadeout2 = true;
+//     howl2.fade(1.,0.,100);
+//     howl2.on('fade', function(){
+//         fadeout2 = false;
+//     });
+// }
 
-if (touchx >= inloc2 && fadein2 == false && howl2.volume() <= 0.3){
-    fadein2 = true;
-    howl2.fade(0.,1.,100);
-    howl2.on('fade', function(){
-        fadein2 = false;
-    });
+// if (touchx >= inloc2 && fadein2 == false && howl2.volume() <= 0.3){
+//     fadein2 = true;
+//     howl2.fade(0.,1.,100);
+//     howl2.on('fade', function(){
+//         fadein2 = false;
+//     });
     
-}
+// }
+
+if(start == true && howl1.playing() == false && touchx < 0.5){
+    howl1.play();
+    howl2.pause();
+
+ }
+
+ if(start == true && howl2.playing() == false && touchx >= 0.5){
+    howl2.play();
+    howl1.pause();
+
+ }
 
     },
     false

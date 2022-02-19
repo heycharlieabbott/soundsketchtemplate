@@ -12,18 +12,3 @@ var howl2 = new Howl({
     html5: true,
     loop: true,
   });
-
-myCanvas.addEventListener('click', function() {
-
-    if (howl1.playing() == true || howl2.playing() == true ){
-        howl1.pause();
-        howl2.pause();
-    }
-
-    else {
-        howl1.play();
-        howl2.play();
-    }
-    
-
-}, false);

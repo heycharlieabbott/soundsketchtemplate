@@ -5,12 +5,12 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth,window.innerHeight);
 
 //main camera and scene
-var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
+var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 1);
 camera.add( listener );
 var scene = new THREE.Scene();
 
 //start menu
-var startcamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 3000);
+var startcamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 5);
 var startscene = new THREE.Scene();
 
 const texture = new THREE.TextureLoader().load('js/startbutton.png');
@@ -26,10 +26,27 @@ var start = false;
 myCanvas.addEventListener('click', 
     event => { 
         start = !start;
-        if(start == true && howl1.volume() <0.2 && howl2.volume() < 0.2 ){
-            howl1.volume(1.);
-            howl2.volume(0.);
+        // if(start == true && howl1.volume() <0.2 && howl2.volume() < 0.2 ){
+        //     howl1.volume(1.);
+        //     howl2.volume(0.);
         
+        // }
+
+        if(start == true && howl1.playing() == false && mousex < 0.5){
+            howl1.play();
+            howl2.pause();
+        
+         }
+        
+         if(start == true && howl2.playing() == false && mousex >= 0.5){
+            howl2.play();
+            howl1.pause();
+        
+         }
+        
+         if (start == false){
+          howl1.pause();
+          howl2.pause();
         }
 }, false);
 
