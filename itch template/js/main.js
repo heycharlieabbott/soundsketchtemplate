@@ -12,14 +12,19 @@ var scene = new THREE.Scene();
 //start menu
 var startcamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight,0.1, 5);
 var startscene = new THREE.Scene();
-
 const texture = new THREE.TextureLoader().load('js/startbutton.png');
-
 const geometry = new THREE.PlaneGeometry( 3, 3 );
 const material = new THREE.MeshBasicMaterial( {map: texture} );
 const plane = new THREE.Mesh( geometry, material );
 startcamera.position.z =5;
 startscene.add( plane );
+
+//use CCapture to record image sequences in PNG format, default set to record 32 seconds
+var capturer = new CCapture( { 
+    format: 'png' , 
+    framerate: 30, 
+    timeLimit: 32
+} );
 
 //start menu toggle
 var start = false;
@@ -55,6 +60,22 @@ function onWindowResize(){
     camera.updateProjectionMatrix();
 }
 
+//start image seqeunce record.  s key starts record, e key stops and saves the recording
+window.addEventListener('keydown', 
+    event => { 
+        //
+        if (event.key === 's'){
+            capturer.start();
+        }
+
+        if (event.key === 'e'){
+            capturer.stop();
+            capturer.save();
+        }   
+        
+
+}, false);
+
 
 //composers
 var composer = new THREE.EffectComposer(renderer);  
@@ -73,7 +94,7 @@ var pass3 = new THREE.ShaderPass(THREE.CopyShader2);
 pass3.renderToScreen = true;
 this.composer.addPass(pass3);
 
-
+//intialize time, window width and height uniforms;
 var times = 0;
 
 pass1.uniforms.width.value = window.innerWidth;
@@ -107,6 +128,9 @@ function render(){
     }
 
      else renderer.render(startscene,startcamera);
+
+     //CCapture image capture
+     capturer.capture(document.getElementById('myCanvas')); 
    
 }
 
